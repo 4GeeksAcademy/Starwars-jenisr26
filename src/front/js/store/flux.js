@@ -1,4 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const host = "https://playground.4geeks.com/contact";
+	const user = "jenny26";
 	return {
 		store: {
 			message: null,
@@ -7,16 +9,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cohorte: 'spain-93',
 			user: 'Jenny',
 			is_logged: false,
-			alert: { text: 'Mi primer Alert', visible: true, background: 'success' }
+			alert: { text: 'Mi primer Alert', visible: true, background: 'success' },
+			listContacts: [],
 		},
 		actions: {
-			setUser: (newvalue) => {setStore({ user: newvalue})},
-			setAlert: (newAlert) => {setStore({ alert: newAlert})},
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			setUser: (newvalue) => { setStore({ user: newvalue }) },
+			setAlert: (newAlert) => { setStore({ alert: newAlert }) },
+			getContacts: async () => {
+				const uri = `${host}/agendas/${user}/contacts` // Defino la uri
+				const options = { method: "GET" } // options 
+				const response = await fetch(uri, options) // response
+				if (!response.ok) {
+					//trato el error
+					console.log("ERROR", response.status, response.statusText)
+					return
+				}// If del response
+				const data = await response.json()
+				console.log(data) // Captruo el json del response
+				// Logica de mi funcion
+				setStore({ listContacts: data.contacts })
 			},
+			deleteContact: (id) => {
+				console.log(id, "este es el id que recibe el actions.deleteContact");
+				// Hacer el fetch() con el metodo delete para borrar el contacto 
 
+				// leo de vuelta todos los contactos de la API actualizada
+				getActions().getContacts();
+			},
+			exampleFunction: () => { getActions().changeColor(0, "green"); },
 			getMessage: async () => {
 				try {
 					// fetching data from the backend
