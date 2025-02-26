@@ -22,10 +22,8 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">{store.cohorte}</span>
 				</Link>
 				<div className="ml-auto">
-					Bienvenido {store.user}
-					<span onClick={changeUser} className="btn btn-success btn-sm">newUser</span>
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
+					<Link to="/contacts">
+						<button className="btn btn-primary">Contacts</button>
 					</Link>
 				</div>
 			</div>

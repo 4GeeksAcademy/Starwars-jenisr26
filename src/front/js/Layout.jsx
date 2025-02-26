@@ -6,12 +6,13 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/BackendURL.jsx";
 import { Navbar } from "./component/Navbar.jsx";
 import { Footer } from "./component/Footer.jsx";
-import { Alert } from "./component/Alert.jsx"
 //Custom Pages or Views
-import { Home } from "./pages/home";
+import { Home } from "./pages/Home.jsx";
 import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
-import { Login } from "./pages/Login.jsx";
+import { Contacts } from "./pages/Contacts.jsx"
+import { AddContact } from "./pages/AddContact.jsx";
+import { EditContact } from "./pages/EditContact.jsx";
+
 
 
 //create your first component
@@ -26,13 +27,13 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-                    <Alert />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<Contacts />} path="/contacts" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<Login />} path="/login" />
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route element={<AddContact />} path="/add" />
+                        <Route element={<EditContact />} path="/edit" />
+                        <Route element={<h1>Not found!</h1>} path="*todos" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
