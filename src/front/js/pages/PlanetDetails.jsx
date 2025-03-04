@@ -5,5 +5,6 @@ export const PlanetDetails = () => {
 
     const { actions, store } = useContext(Context)
 
-    return( <div>{store.currentItemDetails.gender} {store.currentItemDetails.name}</div> )
+    return( <div>{store.currentItemDetails.name} {store.currentItemDetails.name} {store.currentItemDetails.gender} {store.currentItemDetails.name}
+    {store.currentItemDetails.gender} {store.currentItemDetails.name} {store.currentItemDetails.gender} {store.currentItemDetails.name}</div> )
 }
