@@ -16,10 +16,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			starships: [],
 			planets: [],
 			starwarsURL: "https://www.swapi.tech/api",
-			activePage: "planets"
+			activePage: "planets",
+			currentItemDetails: {}
 		},
 		actions: {
-			getItemsDetails: () => {},
+			getItemsDetails: async (uri) => {
+				const options = { method: 'GET'}
+				const response = await fetch( uri, options)
+				if (!response.ok) {
+					console.log("ERROR: ", response.status, response.statusText)
+					return
+				}
+				const data = await response.json()
+				setStore({currentItemDetails: data.result.properties})
+				console.log("soy details", data.result.properties)
+			},
 			setActivePage: (page) => { 
 				setStore({activePage: page})
 			}, 
