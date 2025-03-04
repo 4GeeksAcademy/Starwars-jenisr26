@@ -17,7 +17,6 @@ class Users(db.Model):
         return f'<User id: {self.id} - {self.email}>'
 
     def serialize(self):
-        # Do not serialize the password, its a security breach
         return {'id': self.id,
                 'email': self.email,
                 'is_active': self.is_active,
@@ -34,6 +33,11 @@ class Products(db.Model):
     def __repr__(self):
         return f'<Product: {self.id} - {self.name}>'
 
+    def serialize(self):
+        return {'id': self.id,
+                'name': self.name,
+                'description': self.description,
+                'price': self.price}
 
 class Bills(db.Model):
     __tablename__ = 'bills'
@@ -47,7 +51,7 @@ class Bills(db.Model):
     user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('bills_to', lazy='select'))
 
     def __repr__(self):
-        return f'<Bills: {self.id} - user: {self.user_id}>'
+        return f'<Bills: {self.id} - user: {self.user_id}>' 
 
 
 class BillItems(db.Model):
@@ -60,14 +64,13 @@ class BillItems(db.Model):
     bill_to = db.relationship('Bills', foreign_keys=[bill_id], backref=db.backref('bill_items', lazy='select'))
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     product_to = db.relationship('Products', foreign_keys=[product_id], backref=db.backref('bill_items', lazy='select'))
-
+ 
     def __repr__(self):
-        return f'<Bill {self.bill_id} items: {self.id} product: {self.product_id}>'
-
+        return f'<Bill {self.bill_id} items: {self.id} product: {self.product_id}>' 
 
 class Followers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    following_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # Columna Clave Foranea
-    following_to = db.relationship('Users', foreign_keys=[following_id], backref=db.backref('following_to'), lazy='select')  # La relación
+    following_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    following_to = db.relationship('Users', foreign_keys=[following_id], backref=db.backref('following_to'), lazy='select')
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     follower_to = db.relationship('Users', foreign_keys=[follower_id], backref=db.backref('follower_to'), lazy='select')

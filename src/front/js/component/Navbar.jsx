@@ -1,18 +1,14 @@
 import React, { useContext } from "react";
 import { Context } from '../store/appContext.js';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
-	const changeUser = () => {
-		actions.setUser('Orlando')
-		const message = {
-			text: 'Hemos cambiado de usuario',
-			visible: true,
-			background:'warning'
-		}
-		actions.setAlert(message)
+	const navigate = useNavigate();
+	const handleSelected = (page) => {
+		actions.setActivePage(page);
+		navigate("/" + page)
 	}
 
 	return (
@@ -25,6 +21,9 @@ export const Navbar = () => {
 					<Link to="/contacts">
 						<button className="btn btn-primary">Contacts</button>
 					</Link>
+					<span className="btn btn-primary" onClick={() => handleSelected("people")}> Characters</span>
+					<span className="btn btn-primary" onClick={() => handleSelected("planets")}> Planes</span>
+					<span className="btn btn-primary" onClick={() => handleSelected("starships")}> Starships</span>
 				</div>
 			</div>
 		</nav>

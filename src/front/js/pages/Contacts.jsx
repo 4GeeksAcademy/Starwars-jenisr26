@@ -1,11 +1,16 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from 'react-router-dom'
 import { Context } from "../store/appContext.js";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Contacts = () => {
 
+    const navigate = useNavigate();
     const { store, actions } = useContext(Context)
     console.log(store.listContacts)
+    const editContact = (contact) => {
+        actions.setCurrentContact(contact);
+        navigate("/edit")
+    }
     const eliminarContacto = (id) => {
         // Llamar al action que borra el contacto enviando como parametro el id
         actions.deleteContact(id)
@@ -14,7 +19,7 @@ export const Contacts = () => {
     return (
         <div className="w-75 mx-auto">
             <div className="d-flex justify-content-end">
-                <Link to="/AddContact">
+                <Link to="/add">
                     <button className="btn btn-success">Add a new contact</button>
                 </Link>
             </div>
@@ -38,9 +43,9 @@ export const Contacts = () => {
                                     <p className="card-text mb-1">{contact.email}</p>
                                 </div>
                                 <div className="col-md-3 d-flex justify-content-end">
-                                    <Link to={"/editContact/" + contact.id} className="btn btn-link p-0 me-3">
+                                    <button type="button"  onClick={() => editContact(contact)}>
                                         <i className="fa fa-eraser"></i>
-                                    </Link>
+                                    </button>
                                     <button type="button"  onClick={() => eliminarContacto(contact.id)}>
                                         <i className="fa fa-trash fa-lg"></i>
                                     </button>

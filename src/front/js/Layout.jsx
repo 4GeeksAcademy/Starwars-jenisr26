@@ -12,6 +12,7 @@ import { Demo } from "./pages/demo";
 import { Contacts } from "./pages/Contacts.jsx"
 import { AddContact } from "./pages/AddContact.jsx";
 import { EditContact } from "./pages/EditContact.jsx";
+import { StarwarsItems } from "./pages/StarwarsItems.jsx";
 
 
 
@@ -33,7 +34,11 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<AddContact />} path="/add" />
                         <Route element={<EditContact />} path="/edit" />
+                        <Route element={<StarwarsItems />} path="/people" />
+                        <Route element={<StarwarsItems />} path="/starships" />
+                        <Route element={<StarwarsItems />} path="/planets" />
                         <Route element={<h1>Not found!</h1>} path="*todos" />
+                        
                     </Routes>
                     <Footer />
                 </ScrollToTop>
