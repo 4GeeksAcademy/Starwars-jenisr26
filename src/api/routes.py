@@ -92,3 +92,4 @@ def product(id):
         response_body['message'] = f'Hemos borrado el procuto id {id}'
         response_body['results'] = {}
         return response_body, 200
+    
