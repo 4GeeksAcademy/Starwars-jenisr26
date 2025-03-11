@@ -8,7 +8,7 @@ export const Home = () => {
 
 	return (
 		<div className="text-center my-5 bg-dark">
-			<img src="https://starwars.chocobar.net/star-wars-back0.jpg"></img>
+			<img width={"100%"} src="https://starwars.chocobar.net/star-wars-back0.jpg"></img>
 		</div>
 	);
 };

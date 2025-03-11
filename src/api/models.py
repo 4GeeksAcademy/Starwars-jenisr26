@@ -146,7 +146,7 @@ class Planets(db.Model):
     terrain = db.Column(db.String())
 
 
-class PlanetFavorite(db.Model):
+class PlanetFavorites(db.Model):
     _table_ = 'planet_favorite'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

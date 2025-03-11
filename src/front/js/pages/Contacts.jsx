@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
 import { Link, useNavigate } from "react-router-dom";
+import rigoImageUrl from "../../img/png.png";
 
 export const Contacts = () => {
 
@@ -12,7 +13,6 @@ export const Contacts = () => {
         navigate("/edit")
     }
     const eliminarContacto = (id) => {
-        // Llamar al action que borra el contacto enviando como parametro el id
         actions.deleteContact(id)
     }
 
@@ -26,21 +26,16 @@ export const Contacts = () => {
             <ul className="list-group mt-3">
                 {store.listContacts && store.listContacts.length > 0 && store.listContacts.map((contact, index) => {
                     return (
-                        <li key={contact.id} className="list-group-item d-flex justify-content-center">
+                        <li key={contact.id} className="list-group-item d-flex justify-content-center bg-dark text-white">
                             <div className="d-flex align-items-center w-75">
                                 <div className="col-md-3 d-flex justify-content-center">
-                                    <img
-                                        className="rounded-circle"
-                                        src="https://picsum.photos/170/170/"
-                                        alt="Contact"
-
-                                    />
+                                    <img className="rounded-circle" src={rigoImageUrl} alt="Contact" style={{ width: "200px", height: "200px" }} />
                                 </div>
                                 <div className="col-md-6">
                                     <h5 className="card-title mb-1">{contact.name}</h5>
-                                    <p className="card-text mb-1">{contact.address}</p>
                                     <p className="card-text mb-1">{contact.phone}</p>
                                     <p className="card-text mb-1">{contact.email}</p>
+                                    <p className="card-text mb-1">{contact.address}</p>
                                 </div>
                                 <div className="col-md-3 d-flex justify-content-end">
                                     <button type="button"  onClick={() => editContact(contact)}>
@@ -49,9 +44,6 @@ export const Contacts = () => {
                                     <button type="button"  onClick={() => eliminarContacto(contact.id)}>
                                         <i className="fa fa-trash fa-lg"></i>
                                     </button>
-                                   
-                                   
-                                    
                                 </div>
                             </div>
                         </li>
