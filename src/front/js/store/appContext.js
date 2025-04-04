@@ -29,6 +29,9 @@ const injectContext = PassedComponent => {
 		 **/
 		useEffect(() => {
 			state.actions.getContacts();
+			state.actions.getStarwarsData("planets");
+			state.actions.getStarwarsData("people");
+			state.actions.getStarwarsData("starships");
 			// state.actions.getMessage(); // <---- calling this function from the flux.js actions
 		}, []);
 

@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const Footer = () => {
-	//Code JS
+
 	const { store } = useContext(Context)
 	return (
-		<footer className="footer mt-auto py-3 text-center">
-			<p>
+			<footer className="footer mt-auto py-3 bg-body-tertiary text-center bg-dark ">
+				<p className="text-secondary text-white">
+					Con mucho amor de parte de Jenny <i className="fa-regular fa-heart"></i>
+				</p>
 				
-			</p>
-		</footer>
+			</footer>
 	);
 }
