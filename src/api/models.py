@@ -125,16 +125,21 @@ class Characters(db.Model):
 
 
 class CharacterFavorite(db.Model):
-    _table_ = 'character_favorite'
+    __tablename__ = 'character_favorite'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('character_favorite'), lazy='select')
     character_id = db.Column(db.Integer, db.ForeignKey('characters.id'))
     character_to = db.relationship('Characters', foreign_keys=[character_id], backref=db.backref('character_favorite', lazy='select'))
 
+    def serialize(self):
+        return {'id': self.id,
+                'user_id': self.user_id,
+                'character_id': self.character_id}
+
 
 class Planets(db.Model):
-    _table_ = 'planets'
+    __tablename__ = 'planets'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     diameter = db.Column(db.String())
@@ -147,10 +152,16 @@ class Planets(db.Model):
 
 
 class PlanetFavorites(db.Model):
-    _table_ = 'planet_favorite'
+    __tablename__ = 'planet_favorite'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('planet_favorite'), lazy='select')
     planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
     planet_to = db.relationship('Planets', foreign_keys=[planet_id], backref=db.backref('planet_favorite', lazy='select'))
     
+    def serialize(self):
+        return {'id': self.id,
+                'user_id': self.user_id,
+                'planet_id': self.planet_id}
+
+
