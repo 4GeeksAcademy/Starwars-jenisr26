@@ -165,3 +165,13 @@ class PlanetFavorites(db.Model):
                 'planet_id': self.planet_id}
 
 
+    def __repr__(self):
+        return f'<Bill {self.bill_id} items: {self.id} product: {self.product_id}>'
+
+
+class Followers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    following_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # Columna Clave Foranea
+    following_to = db.relationship('Users', foreign_keys=[following_id], backref=db.backref('following_to'), lazy='select')  # La relación
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    follower_to = db.relationship('Users', foreign_keys=[follower_id], backref=db.backref('follower_to'), lazy='select')
